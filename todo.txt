@@ -1,0 +1,5 @@
+finish rust.sh
+add .vimrc setup
+add installing common packages
+add git setup
+put all commands in env
