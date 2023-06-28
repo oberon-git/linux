@@ -1,6 +1,7 @@
 #!/bin/bash
 
 root="$HOME/.linux"
+rm -r -f ${root}
 mkdir ${root}
 
 cp common.sh "${root}"
@@ -10,7 +11,7 @@ touch ${env}
 
 for file in "${root}/*"
 do
-	if [ ${file} != "env" ]
+	if [[ ${file} != "env" ]]
 	then
 		echo ". \"${root}/${file}\"" >> ${env}
 	fi
@@ -18,9 +19,10 @@ done
 
 chmod -R u+x ${root}
 
-cmd=". \"${env}\""
+cmd=". \"\$HOME/.linux/env\""
 bashrc="$HOME/.bashrc"
-if ! grep -Fxq ${cmd} ${bashrc}
-then
+#exists=$(cat ${bashrc} | grep -Fxqc ${cmd})
+#if [[ ${exists} -eq 0 ]]
+#then
 	echo ${cmd} >> ${bashrc}
-fi
+#fi
