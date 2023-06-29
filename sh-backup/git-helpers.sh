@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git-push() {
+push() {
     if [ $# -ne 2 ]
     then
         echo "usage: $0 repo_name commit_message" ; return

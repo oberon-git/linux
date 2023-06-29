@@ -54,7 +54,7 @@ mkdir ${root}
 env=${root}/env
 echo "#!/bin/bash" > ${env}
 
-for file in "./sh/*"
+for file in sh/*
 do
 	tail +2 ${file} >> ${env}
 done
