@@ -11,15 +11,13 @@ chmod -R u+x .
 
 # parse command line args
 verbose=false
-install_rust=false
 skip_install=false
 
 export OPTIND=1
 while getopts ":hvrs" option; do
   case $option in
-    h) echo "usage: $0 [-h] [-v] [-s] [-r]"; return ;;
+    h) echo "usage: $0 [-h] [-v] [-s]"; return ;;
     v) verbose=true ;;
-    r) install_rust=true ;;
     s) skip_install=true ;;
     ?) echo "error: option -$OPTARG is not implemented"; return ;;
   esac
@@ -40,10 +38,13 @@ then
         fi
     done
 
-    if ${install_rust}
-    then
-        . packages/install-rust.sh
-    fi
+    for script in packages/*.sh
+    do
+        if ${verbose}
+        then
+            . "${script}"
+        fi
+    done
 
     if ${verbose}
     then
