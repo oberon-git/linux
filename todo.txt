@@ -1,3 +1,2 @@
 finish adding packages to install
-add git setup
 add rustup installation

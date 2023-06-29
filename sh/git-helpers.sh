@@ -1,7 +1,7 @@
 #!/bin/bash
 
 push() {
-    if [ $# -eq 0 ]
+    if [ $# -ne 2 ]
     then
         echo "usage: $0 repo_name commit_message" ; return
     fi
@@ -11,12 +11,7 @@ push() {
 
     git add .
 
-    if [ -z "${commit_message}" ]
-    then
-        git commit -m "${commit_message}"
-    else
-        git commit -m "commit"
-    fi
+    git commit -m "${commit_message}"
     
     username=""
     if [ -f "$HOME/.git-username" ]

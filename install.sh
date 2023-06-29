@@ -77,6 +77,9 @@ then
 	echo ${cmd} >> ${bashrc}
 fi
 
+# run command
+. "$HOME/.linux/env"
+
 # remove the linux directory and restore directory
 #if ! preserve_dir
 #then
