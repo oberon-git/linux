@@ -1,2 +1,3 @@
+fix install.sh (deleteing shell scripts)
 finish adding packages to install
 add rustup installation
