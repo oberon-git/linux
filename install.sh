@@ -12,10 +12,10 @@ preserve_dir=false
 
 while getopts ":hvp" option; do
   case $option in
-    h) echo "usage: $0 [-h] [-v] [-p]"; exit ;;
+    h) echo "usage: $0 [-h] [-v] [-p]"; return ;;
     v) verbose=true ;;
     p) preserve_dir=true ;;
-    ?) echo "error: option -$OPTARG is not implemented"; exit ;;
+    ?) echo "error: option -$OPTARG is not implemented"; return ;;
   esac
 done
 
