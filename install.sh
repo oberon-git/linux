@@ -6,21 +6,25 @@ s="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")
 sd=$(dirname "${s}")
 cd ${sd}
 
+chmod -R u+x .
+
 # parse command line args
 verbose=false
 preserve_dir=false
+install_rust=false
 
-while getopts ":hvp" option; do
+while getopts ":hvpr" option; do
   case $option in
     h) echo "usage: $0 [-h] [-v] [-p]"; return ;;
     v) verbose=true ;;
     p) preserve_dir=true ;;
+    r) install_rust=true ;;
     ?) echo "error: option -$OPTARG is not implemented"; return ;;
   esac
 done
 
 # installing packages
-#packages=$(cat packages.txt)
+#packages=$(cat packages/apt-get.txt)
 #for package in ${packages}
 #do
 #    if ${verbose}
@@ -31,8 +35,12 @@ done
 #    fi
 #done
 
-#chmod u+x common.sh
-#. ./common.sh
+if ${install_rust}
+then
+    . packages/install-rust.sh
+fi
+
+#. sh/common.sh
 
 # TODO uncomment when done testing
 # if ${verbose}
@@ -52,11 +60,13 @@ rm -r -f ${root}
 mkdir ${root}
 
 env=${root}/env
-echo "#!/bin/bash" > ${env}
+printf "#!/bin/bash\n\n" > ${env}
 
-for file in sh/*
+# TODO put PATH logic in env
+cp -r sh ${root}/sh
+for file in ${root}/sh/*
 do
-	tail +2 ${file} >> ${env}
+	echo ${file} >> ${env}
 done
 
 cp -r ./bin ${root}/bin 
