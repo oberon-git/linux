@@ -12,7 +12,7 @@ alias main='vim src/main.rs'
 alias lib='vim src/lib.rs'
 
 new() {
-	cargo new ${1} ; cd ${1}
+	cargo new ${1} && cd ${1}
 }
 
 publish() {

@@ -3,7 +3,7 @@
 git-push() {
     if [ $# -ne 2 ]
     then
-        echo "usage: $0 repo_name commit_message" ; return
+        echo "usage: $0 repo_name commit_message" ; return 1
     fi
 
     repo_name="${1}"
@@ -28,10 +28,41 @@ git-push() {
     then
         token=$(cat "$HOME/.git-token")
     else
-        echo "place git api token in ~/.git-token to bypass this step"
         echo "enter git api token"
         read -r token
+        
+        echo "place git api token in ~/.git-token to bypass this step?"
     fi
 
     git push "https://${token}@github.com/${username}/linux.git"
+}
+
+git-ignore() {
+    if [ ! -f .gitignore ]
+    then
+        if [ ! -d .git ]
+        then
+            echo "must be in the root of a git repository" ; return 1
+        else
+            touch .gitignore
+        fi
+    fi
+
+    for path in "$@"
+    do
+        if [ -f "${path}" ]
+        then
+            echo "${path}" >> .gitignore
+        elif [ -d "${path}" ]
+        then
+            if [[ "${path}" == *"/" ]]
+            then 
+                echo "${path}" >> .gitignore
+            else
+                echo "${path}/" >> .gitignore
+            fi
+        else
+            echo "${path} does not exist"
+        fi
+    done
 }

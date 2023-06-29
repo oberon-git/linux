@@ -1,7 +1,4 @@
 #!/bin/bash
 
 alias xclip='xclip -sel clip'
-
-update-dist() {
-    apt-get update && apt-get upgrade -y && apt-get autoremove && apt-get autoclean
-}
+alias apt-update='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove && sudo apt-get autoclean'

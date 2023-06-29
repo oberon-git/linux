@@ -1,0 +1,8 @@
+#!/bin/bash
+
+root="$HOME/.linux"
+
+if [ -d "${root}/bin" ] && [[ ":$PATH:" != *":${root}/bin:"* ]]
+then
+    export PATH="${PATH:+"$PATH:"}${root}/bin"
+fi

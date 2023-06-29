@@ -1,4 +1,0 @@
-finish fixing up env
-add a git-ignore helper
-finish adding packages to install
-add rustup installation
