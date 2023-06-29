@@ -1,30 +1,38 @@
 #!/bin/bash
 
+# get the cwd and change directories
+cwd=$(pwd)
+s="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
+sd=$(dirname "${s}")
+cd ${sd}
+
 # parse command line args
 verbose=false
+preserve_dir=false
 
-while getopts ":hv" option; do
+while getopts ":hvp" option; do
   case $option in
-    h) echo "usage: $0 [-h] [-v]"; exit ;;
+    h) echo "usage: $0 [-h] [-v] [-p]"; exit ;;
     v) verbose=true ;;
+    p) preserve_dir=true ;;
     ?) echo "error: option -$OPTARG is not implemented"; exit ;;
   esac
 done
 
 # installing packages
-packages=$(cat packages.txt)
-for package in ${packages}
-do
-    if ${verbose}
-    then
-        sudo apt-get install ${package}
-    else
-        sudo apt-get install ${package} > /dev/null
-    fi
-done
+#packages=$(cat packages.txt)
+#for package in ${packages}
+#do
+#    if ${verbose}
+#    then
+#        sudo apt-get install ${package}
+#    else
+#        sudo apt-get install ${package} > /dev/null
+#    fi
+#done
 
-chmod u+x common.sh
-. ./common.sh
+#chmod u+x common.sh
+#. ./common.sh
 
 # TODO uncomment when done testing
 # if ${verbose}
@@ -35,47 +43,43 @@ chmod u+x common.sh
 # fi
 
 # setting up config files
-cp .vimrc ~/.vimrc
+rm -f "$HOME/.vimrc"
+cp .vimrc "$HOME/.vimrc"
 
 # configuring the .linux directory
 root="$HOME/.linux"
 rm -r -f ${root}
 mkdir ${root}
 
-tmp=${root}/tmp
-mkdir ${tmp}
-
-cp common.sh "${tmp}"
-
 env=${root}/env
-touch ${env}
+echo "#!/bin/bash" > ${env}
 
-for file in "${root}/*"
+for file in "./sh/*"
 do
-	if [[ ${file} != "env" ]]
-	then
-		echo ". \"${root}/${file}\"" >> ${env}
-	fi
+	tail +2 ${file} >> ${env}
 done
 
-rm -r -f ${tmp}
+cp -r ./bin ${root}/bin 
 
-bin=${root}/bin
-mkdir ${bin}
-
-if [ -d "${bin}" ] && [[ ":$PATH:" != *":${bin}:"* ]]; then
-    PATH="${PATH:+"$PATH:"}${bin}"
+if [ -d "${root}/bin" ] && [[ ":$PATH:" != *":${root}/bin:"* ]]
+then
+    export PATH="${PATH:+"$PATH:"}${root}/bin"
 fi
-
-cp rustsh ${bin}
 
 chmod -R u+x ${root}
 
+# add command to .bashrc
 cmd=". \"\$HOME/.linux/env\""
 bashrc="$HOME/.bashrc"
-#exists=$(cat ${bashrc} | grep -Fxqc ${cmd})
-#if [[ ${exists} -eq 0 ]]
-#then
+bashrc_content=$(cat ${bashrc})
+if [[ "$(cat ${bashrc})" != *"${cmd}"* ]]
+then
 	echo ${cmd} >> ${bashrc}
-#fi
+fi
 
+# remove the linux directory and restore directory
+#if ! preserve_dir
+#then
+#    cd ../ ; rm -r -f ${sd}
+#fi
+cd ${cwd}

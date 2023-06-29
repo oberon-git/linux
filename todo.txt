@@ -1,5 +1,3 @@
 finish adding packages to install
 add git setup
 add rustup installation
-put all commands in env
-fix adding bin to path

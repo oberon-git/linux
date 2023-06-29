@@ -6,6 +6,8 @@ alias build='cargo build'
 alias add='cargo add'
 alias remove='cargo remove'
 alias doc='cargo doc --open'
+alias install='cargo install'
+alias toml='vim Cargo.toml'
 alias main='vim src/main.rs'
 alias lib='vim src/lib.rs'
 
