@@ -34,7 +34,7 @@ git-push() {
         echo "place git api token in ~/.git-token to bypass this step?"
     fi
 
-    git push "https://${token}@github.com/${username}/linux.git"
+    git push "https://${token}@github.com/${username}/${repo_name}.git"
 }
 
 git-ignore() {
