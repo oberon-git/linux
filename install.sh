@@ -12,13 +12,15 @@ chmod -R u+x .
 # parse command line args
 verbose=false
 skip_install=false
+use_rustsh=false
 
 export OPTIND=1
-while getopts ":hvrs" option; do
+while getopts ":hrsv" option; do
   case $option in
-    h) echo "usage: $0 [-h] [-v] [-s]"; return ;;
-    v) verbose=true ;;
+    h) echo "usage: $0 [-h] [-r] [-v] [-s]"; return ;;
+    r) use_rustsh=true ;; 
     s) skip_install=true ;;
+    v) verbose=true ;;
     ?) echo "error: option -$OPTARG is not implemented"; return ;;
   esac
 done
@@ -72,6 +74,11 @@ for file in sh/*
 do
 	tail +2 "${file}" >> "${env}"
 done
+
+if ${use_rustsh}
+then
+    printf "\n. \"\$HOME/.linux/bin/rustsh\"\n" >> "${env}"
+fi
 
 chmod -R u+x "${root}"
 
