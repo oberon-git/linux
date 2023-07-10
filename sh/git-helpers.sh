@@ -1,13 +1,18 @@
 #!/bin/bash
 
 git-push() {
-    if [ $# -ne 2 ]
-    then
-        echo "usage: $0 repo_name commit_message" ; return 1
-    fi
+    if [[ ! -d .git ]]
+    then 
+       echo "must be in root of repository" ; return 1
+    fi 
 
-    repo_name="${1}"
-    commit_message="${2}"
+    repo_name=${pwd##*/}
+    if [[ -z "${1}" ]]
+    then
+        commit_message="commit"
+    else
+        commit_message="${1}"
+    fi
 
     git add .
 
@@ -28,10 +33,9 @@ git-push() {
     then
         token=$(cat "$HOME/.git-token")
     else
+        echo "place git api token in ~/.git-token to bypass this step"
         echo "enter git api token"
         read -r token
-        
-        echo "place git api token in ~/.git-token to bypass this step?"
     fi
 
     git push "https://${token}@github.com/${username}/${repo_name}.git"

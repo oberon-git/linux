@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ -f Cargo.toml ]]
+then
+    cargo build --release
+    bin_name=${pwd##*/}
+    cp target/release/"${bin_name}" "$HOME/.linux/bin"
+else
+    echo "must be in root of crate or workspace"
+fi
+ 

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ -f src/main.rs ]]
+then
+    vim src/main.rs
+else
+    echo "src/main.rs does not exist"
+fi
+

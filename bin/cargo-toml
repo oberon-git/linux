@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -f Cargo.toml ]]
+then
+    vim Cargo.toml
+else 
+    echo "Cargo.toml does not exist"
+fi
