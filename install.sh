@@ -42,10 +42,7 @@ then
 
     for script in packages/*.sh
     do
-        if ${verbose}
-        then
-            . "${script}"
-        fi
+        . "${script}" -y
     done
 
     if ${verbose}
