@@ -6,7 +6,7 @@ git-push() {
        echo "must be in root of repository" ; return 1
     fi 
 
-    repo_name=${pwd##*/}
+    repo_name=${PWD##*/}
     echo $repo_name
     if [[ -z "${1}" ]]
     then
