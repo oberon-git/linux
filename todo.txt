@@ -1,1 +1,0 @@
-1. make a tool to add a file to path
