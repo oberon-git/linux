@@ -1,4 +1,1 @@
-1. make git-push read the directory name
-2. make a tool to add a file to path
-3. make a rust tool to add a binary to path
-4. make rust aliases into cargo extensions instead
+1. make a tool to add a file to path
