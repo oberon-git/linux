@@ -45,6 +45,8 @@ then
         . "${script}" -y
     done
 
+    rm *.deb
+
     if ${verbose}
     then
         apt-update
