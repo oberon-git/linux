@@ -7,6 +7,7 @@ git-push() {
     fi 
 
     repo_name=${pwd##*/}
+    echo $repo_name
     if [[ -z "${1}" ]]
     then
         commit_message="commit"
