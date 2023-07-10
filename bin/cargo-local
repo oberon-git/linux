@@ -1,11 +1,17 @@
 #!/bin/bash
 
-if [[ -f Cargo.toml ]]
+if [[ -f src/main.rs ]]
 then
     cargo build --release
-    bin_name=${pwd##*/}
-    cp target/release/"${bin_name}" "$HOME/.linux/bin"
+    bin_name=${PWD##*/}
+    if [[ -d target ]]
+    then
+        cp target/release/"${bin_name}" "$HOME/.linux/bin"
+    elif [[ -d ../target ]]
+    then
+        cp ../target/release/"${bin_name}" "$HOME/.linux/bin"
+    fi 
 else
-    echo "must be in root of crate or workspace"
+    echo "must be in root of binary crate"
 fi
  
