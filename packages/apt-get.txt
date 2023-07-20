@@ -6,4 +6,5 @@ xclip
 zip
 unzip
 git
+calc
 
