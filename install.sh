@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# get the cwd and change directories
-cwd="$(pwd)"
-s="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-sd="$(dirname "${s}")"
-cd "${sd}"
-
 chmod -R u+x .
 . sh/common.sh
 
@@ -27,7 +21,7 @@ export OPTIND=1
 # installing packages
 if ! ${skip_install}
 then
-    packages=$(cat packages/apt-get.txt)
+    packages=$(cat apt-get.txt)
     for package in ${packages}
     do
         if ${verbose}
@@ -37,13 +31,6 @@ then
             sudo apt-get install ${package} -y > /dev/null
         fi
     done
-
-    for script in packages/*.sh
-    do
-        . "${script}" -y
-    done
-
-    rm *.deb
 
     if ${verbose}
     then
@@ -85,5 +72,3 @@ fi
 # run command
 . "$HOME/.linux/env"
 
-# restore directory
-cd "${cwd}"
