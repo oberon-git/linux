@@ -1,2 +1,3 @@
 1. Add git ssh setup functions to git-helpers
 2. change todo remove from 0 index to 1 index
+3. Add a linux tool that can list all commands and aliases provided by linux

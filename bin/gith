@@ -1,25 +1,19 @@
 #!/bin/bash
 
-cmd=$1
-
-if [ -z $cmd ]
-then 
-    git
-    exit $?
-fi
-
 if [ -d "$HOME/.linux/bin" ]
 then
+    cmd=$1
     for git_cmd in "$HOME/.linux/bin/git-*"
     do
        if [[ "git-$cmd" == "$git_cmd" ]]
        then
-          $git_cmd
+          shift 1
+          $git_cmd "$@"
           exit $?
        fi
     done
 fi
 
-git $@
+git "$@"
 exit $?
 
