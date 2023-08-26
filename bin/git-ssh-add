@@ -1,0 +1,55 @@
+#!/bin/bash
+
+read -p "GitHub email: " email
+read -p "GitHub username: " username
+
+if [[ ! -d ~/.ssh ]] 
+then
+    mkdir ~/.ssh
+fi
+
+cd ~/.ssh
+
+delim() {
+    echo "----------------------------------------------------------------------"
+}
+
+echo
+delim
+echo "Generating ssh key"
+delim
+ssh-keygen -t rsa -C $email -f $username
+delim
+echo
+
+delim
+echo "Starting ssh agent"
+delim
+eval "$(ssh-agent -s)"
+delim
+echo
+
+delim
+echo "Adding ssh key"
+delim
+ssh-add $username
+delim
+echo
+
+delim 
+echo "Copying public key to clipboard"
+delim
+cat $username.pub | xclip -sel clip
+delim
+echo
+
+delim
+echo "Adding to ssh config"
+delim
+touch config
+echo "Host github.com-$username" >> config
+echo "    HostName github.com" >> config
+echo "    User git" >> config
+echo "    IdentityFile ~/.ssh/$username" >> config
+delim
+

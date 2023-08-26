@@ -1,0 +1,7 @@
+#!/bin/bash
+
+read -p "GitHub username: " username
+sed_str=s/git@github.com:/git@github.com-$username:/
+repo=$(echo $1 | sed $sed_str)
+git clone $repo
+

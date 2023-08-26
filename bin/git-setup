@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ ! -d .git ]]
+then
+    echo "can't find a .git directory"
+    exit 1
+fi
+
+read -p "GitHub email: " email
+read -p "GitHub name: " name
+read -p "GitHub repo: " repo
+
+git config user.email "$email"
+git config user.name "$name"
+
+git remote add origin git@github.com-$username:$username/$repo.git
+     

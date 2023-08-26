@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ ! -d .git ]
+then
+    echo "can't find .git directory"
+    exit 1
+fi
+
+if [ ! -f .gitignore ]
+then
+    touch .gitignore
+fi
+
+for path in "$@"
+do
+    if [ -f "${path}" ]
+    then
+        echo "${path}" >> .gitignore
+    elif [ -d "${path}" ]
+    then
+        if [[ "${path}" == *"/" ]]
+        then 
+            echo "${path}" >> .gitignore
+        else
+            echo "${path}/" >> .gitignore
+        fi
+    else
+        echo "${path} does not exist"
+    fi
+done
