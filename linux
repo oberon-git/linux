@@ -1,0 +1,55 @@
+#!/bin/bash
+
+cmd="$1"
+if [[ ! -d "$HOME/.linux/bin" ]]
+then
+    echo "can't find ~/.linux/bin"
+    exit 1
+fi
+
+cd "$HOME/.linux/bin"
+
+list-bin() {
+    for file in *
+    do
+        if [[ "$file" != git-* ]] && [[ "$file" != cargo-* ]]
+        then
+            echo "$file"
+        fi
+    done
+}
+
+list-git() {
+    for file in git-*
+    do 
+        git_cmd=$(echo "$file" | sed "s/git-\(.*\)/\1/g")
+        echo "git $git_cmd"
+    done    
+}
+
+list-cargo() {
+    for file in cargo-*
+    do 
+        cargo_cmd=$(echo "$file" | sed "s/cargo-\(.*\)/\1/g")
+        echo "cargo $cargo_cmd"
+    done
+}
+
+if [[ $cmd == list ]]
+then
+    list-bin
+    list-git
+    list-cargo
+elif [[ $cmd == bin ]]
+then
+    list-bin
+elif [[ $cmd == git ]]
+then
+    list-git
+elif [[ $cmd == cargo ]]
+then
+    list-cargo
+else
+    echo "usage: linux list | bin | git | cargo"
+fi
+
