@@ -7,6 +7,7 @@ then
 fi
 
 read -p "GitHub email: " email
+read -p "GitHub username: " username
 read -p "GitHub name: " name
 read -p "GitHub repo: " repo
 
