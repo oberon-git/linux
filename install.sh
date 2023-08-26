@@ -4,15 +4,13 @@ chmod -R u+x .
 . sh/common.sh
 
 # parse command line args
-verbose=false
 skip_install=false
 
 export OPTIND=1
 while getopts ":hsv" option; do
   case $option in
-    h) echo "usage: $0 [-h] [-v] [-s]"; return ;;
+    h) echo "usage: $0 [-h] [-s]"; return ;;
     s) skip_install=true ;;
-    v) verbose=true ;;
     ?) echo "error: option -$OPTARG is not implemented"; return ;;
   esac
 done
@@ -24,20 +22,10 @@ then
     packages=$(cat apt-get.txt)
     for package in ${packages}
     do
-        if ${verbose}
-        then
-            sudo apt-get install ${package} -y
-        else
-            sudo apt-get install ${package} -y > /dev/null
-        fi
+        sudo apt-get install ${package} -y
     done
 
-    if ${verbose}
-    then
-        apt-update
-    else
-        apt-update > /dev/null
-    fi
+    apt-update
 fi
 
 # setting up config files
