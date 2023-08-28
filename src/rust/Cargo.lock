@@ -7,5 +7,9 @@ name = "macros"
 version = "0.1.0"
 
 [[package]]
+name = "note"
+version = "0.1.0"
+
+[[package]]
 name = "todo"
 version = "0.1.0"

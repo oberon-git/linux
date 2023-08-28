@@ -10,9 +10,10 @@ read -p "GitHub email: " email
 read -p "GitHub username: " username
 read -p "GitHub name: " name
 read -p "GitHub repo: " repo
+read -p "GitHub owner: " owner
 
 git config user.email "$email"
 git config user.name "$name"
 
-git remote add origin git@github.com-$username:$username/$repo.git
-git remote set-url origin git@github.com-$username:$username/$repo.git
+git remote add origin git@github.com-$username:$owner/$repo.git
+git remote set-url origin git@github.com-$username:$owner/$repo.git
