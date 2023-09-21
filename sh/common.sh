@@ -12,3 +12,14 @@ bin() {
     cp "$1" "$HOME/.linux/bin"
 }
 
+mksh() {
+    if [ -z $1 ] 
+    then
+        echo "usage: mksh filename"
+        return 1
+    fi
+
+    printf "#!/bin/bash\n" > "$1"
+    chmod u+x "$1"
+}
+
