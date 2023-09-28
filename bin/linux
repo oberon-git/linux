@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cmd="$1"
+
 if [[ ! -d "$HOME/.linux/bin" ]]
 then
     echo "can't find ~/.linux/bin"

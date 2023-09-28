@@ -19,7 +19,7 @@ mksh() {
         return 1
     fi
 
-    printf "#!/bin/bash\n" > "$1"
+    printf "#!/bin/bash\n\n\n" > "$1"
     chmod u+x "$1"
 }
 
