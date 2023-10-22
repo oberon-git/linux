@@ -11,8 +11,8 @@ To skip installation of packages and updates run
 . install.sh -s
 ```
 
-# Build Source
-Run the following command to build source files into linux/bin
+# Update
+Run the following command to pull the repository and update the local installation.
 ```
-./build.sh
+. update.sh
 ```
