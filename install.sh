@@ -62,4 +62,4 @@ fi
 
 # install command line tools
 chmod u+x install.py
-python install.py
+python install.py >> /dev/null 2>&1
