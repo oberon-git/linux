@@ -1,0 +1,12 @@
+#!/bin/bash
+
+path="$1"
+
+if [[ -z $path || ! -f $path ]]
+then
+    echo "usage: bin path"
+    exit 1
+fi
+
+chmod u+x $path
+cp $path ~/.linux/bin

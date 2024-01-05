@@ -5,4 +5,4 @@ xclip
 zip
 unzip
 git
-
+cargo

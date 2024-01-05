@@ -60,3 +60,8 @@ fi
 # run bashrc
 . "$bashrc"
 
+if ! ${skip_install}
+then    
+    chmod u+x install.py
+    python install.py
+fi
